@@ -1,3 +1,6 @@
+/*representa um repositório financeiro que contém uma quantia determinada de moeda. 
+Podendo ser uma conta bancária, uma carteira, cofre. Ou seja, configurado conforme necessidade do usuário*/
+
 package br.com.dmsouza.financas.model;
 
 import javax.persistence.Entity;
@@ -12,11 +15,13 @@ public class CentroDeCusto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String nome;
-	private Long saldo;
+	private int id;       //para uso e identificação no banco de dados
+	private String nome;  //nome do cento de custo
+	private double saldo;   //saldo atual do centro de custo
 	
-	public CentroDeCusto(String nome, Long saldo) {
+	
+	//contrutores, gets e setters padrões
+	public CentroDeCusto(String nome, double saldo) {
 		this.nome = nome;
 		this.saldo = saldo;
 	}
@@ -29,11 +34,11 @@ public class CentroDeCusto {
 		this.nome = nome;
 	}
 
-	public Long getSaldo() {
+	public double getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Long saldo) {
+	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 
