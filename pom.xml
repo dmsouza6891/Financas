@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.demis</groupId>
+  <artifactId>financeiro</artifactId>
+  <version>1.0.0</version>
+  <name>Controle Financeiro</name>
+  <description>Sistema para gerenciar finanças</description>
+  
+    <dependencies>
+	  	<dependency>
+	  		<groupId>org.hibernate</groupId>
+	  		<artifactId>hibernate-entitymanager</artifactId>
+	  		<version>5.4.27.Final</version>
+	  	</dependency>
+	  	
+	  	<dependency>
+    		<groupId>org.xerial</groupId>
+    		<artifactId>sqlite-jdbc</artifactId>
+    		<version>3.36.0.3</version>
+		</dependency>
+	  	
+	  	<dependency>
+	        <groupId>com.github.gwenn</groupId>
+	        <artifactId>sqlite-dialect</artifactId>
+	        <version>0.1.2</version>
+    	</dependency>
+	  	
+  	</dependencies>
+  
+</project>
