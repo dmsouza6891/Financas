@@ -16,6 +16,8 @@ public class Categoria {
 	private int id; //para uso e identificação no banco de dados
 	private String nome; //nome da categoria que representará o grupo de débitos ou créditos
 	
+	public Categoria() {}
+	
 	//contrutor, getters e setters padrões
 	public Categoria(String nome) {
 		this.nome = nome;

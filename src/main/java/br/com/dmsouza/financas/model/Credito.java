@@ -1,4 +1,4 @@
-//representa uma operação de débito realizada em determinado centro de custo.
+//representa uma operação de crédito realizada em determinado centro de custo.
 package br.com.dmsouza.financas.model;
 
 import java.time.LocalDate;
@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "debitos")
-public class Debito {
+@Table(name = "creditos")
+public class Credito {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,10 @@ public class Debito {
 	@ManyToOne
 	Categoria categoria; //categoria, configurada pelo usuário, para indicar a que grupo pertence o débito 
 	
-	public Debito(){}
+	public Credito() {}
 	
 	//construtor, getters e setters padrões
-	public Debito(LocalDate dataOcorrencia, String descricao, double valor, CentroDeCusto centrodecusto, Categoria categoria) {
+	public Credito(LocalDate dataOcorrencia, String descricao, double valor, CentroDeCusto centrodecusto, Categoria categoria) {
 		this.dataOcorrencia = dataOcorrencia;
 		this.descricao = descricao;
 		this.valor = valor;

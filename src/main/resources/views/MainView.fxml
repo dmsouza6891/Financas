@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.controller.MainViewController">
+   <content>
+      <VBox prefHeight="379.0" prefWidth="507.0">
+         <children>
+            <MenuBar>
+               <menus>
+                  <Menu mnemonicParsing="false" text="Cadastros">
+                     <items>
+                        <MenuItem fx:id="menuItemCentroDeCusto" mnemonicParsing="false" onAction="#onMenuItemCentroDeCustoAction" text="Centros de Custo" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Relatórios">
+                     <items>
+                        <MenuItem fx:id="menuItemExtratoMensal" mnemonicParsing="false" onAction="#onMenuItemExtratoMensalAction" text="Extrato Mensal" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Sobre">
+                     <items>
+                        <MenuItem fx:id="menuItemVersao" mnemonicParsing="false" onAction="#onMenuItemVersaoAction" text="Versão" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
