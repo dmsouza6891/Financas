@@ -1,4 +1,4 @@
-package br.com.dmsouza.financas.controller;
+package br.com.dmsouza.financas.gui.controller;
 
 import java.net.URL;
 import java.util.Iterator;
@@ -29,21 +29,17 @@ public class CentroDeCustoController implements Initializable{
 	@FXML private TableColumn<CentroDeCusto, Double> tableColumnSaldo;
 	@FXML private Button buttonNovo;
 	
-	//public void initialize(URL location, ResourceBundle resources) {
-	//	updateTableView();
-	//}
-	
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
 	}
-	
+
 	private void initializeNodes() {
 		//trecho usado para indicar com quais dados serão populados as células da tabela
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<CentroDeCusto,Integer>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<CentroDeCusto,String>("nome"));
 		tableColumnSaldo.setCellValueFactory(new PropertyValueFactory<CentroDeCusto,Double>("saldo"));
 	}
-	
+
 	public void updateTableView() {
 		List<CentroDeCusto> list = dao.buscarTodos();
 		Iterator<CentroDeCusto> iterator = list.iterator();

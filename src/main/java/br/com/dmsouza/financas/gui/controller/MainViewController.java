@@ -1,18 +1,21 @@
-package br.com.dmsouza.financas.controller;
+package br.com.dmsouza.financas.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.dmsouza.financas.application.Main;
+import br.com.dmsouza.financas.gui.util.Util;
+import br.com.dmsouza.financas.model.CentroDeCusto;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class MainViewController implements Initializable{
 	
@@ -35,7 +38,11 @@ public class MainViewController implements Initializable{
 	}
 
 	@FXML
-	public void onMenuItemCentroDeCustoAction() {
+	public void onMenuItemCentroDeCustoAction(ActionEvent event) {
+		Stage parentStage = (Stage) Main.getMainScene().getWindow();
+		CentroDeCusto obj = new CentroDeCusto();
+		createDialogFormCentroDeCusto(obj, "/views/CadastroCentroDeCusto.fxml", parentStage);	
+		/*
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CentroDeCustoView.fxml"));
 			VBox newVBox = loader.load();
@@ -52,6 +59,29 @@ public class MainViewController implements Initializable{
 			controller.updateTableView(); //atualiza a TableView
 			
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		*/
+	}
+	
+	private void createDialogFormCentroDeCusto(CentroDeCusto obj, String absoluteName, Stage parentStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+			
+			CadastroCentroDeCustoController controller = loader.getController();
+			controller.updateView();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Cadastro de Centro de Custo");
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.setResizable(false);
+			dialogStage.initOwner(parentStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait();
+
+		}
+		catch(IOException e) {
 			e.printStackTrace();
 		}
 	}

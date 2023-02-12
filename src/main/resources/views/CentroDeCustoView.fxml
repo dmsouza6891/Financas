@@ -6,11 +6,11 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.controller.CentroDeCustoController">
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.CentroDeCustoController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button fx:id="buttonNovo" mnemonicParsing="false" onAction="#onBtNewAction" text="Novo" />
+          <Button fx:id="buttonNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" />
         </items>
       </ToolBar>
       <TableView fx:id="tableViewCentroDeCusto" prefHeight="200.0" prefWidth="475.0">
