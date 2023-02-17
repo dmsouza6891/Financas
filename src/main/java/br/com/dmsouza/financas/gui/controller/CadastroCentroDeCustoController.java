@@ -1,8 +1,6 @@
 package br.com.dmsouza.financas.gui.controller;
 
 import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import br.com.dmsouza.financas.model.CentroDeCusto;
@@ -13,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import java.util.ArrayList;
 
 public class CadastroCentroDeCustoController implements Initializable {
 	
@@ -29,19 +28,21 @@ public class CadastroCentroDeCustoController implements Initializable {
 	@FXML private TextField txtSaldo;
 	
 	private CentroDeCustoDao dao = new CentroDeCustoDao(JPAUtil.getEntityManager()); 
-	private List<CentroDeCusto> registros;
+	private ArrayList<CentroDeCusto> registros = new ArrayList<CentroDeCusto>(dao.buscarTodos());
+	private int posicaoAtual=0;
 	
 	public void initialize(URL location, ResourceBundle resources) {
+		txtCodigo.setDisable(true);
+		txtNome.setDisable(true);
+		txtSaldo.setDisable(true);
 		updateView();
 	}
 	
 	public void updateView() {
-		registros = dao.buscarTodos();
-		Iterator<CentroDeCusto> iterator = registros.iterator();
-		if(iterator.hasNext()) {
-			CentroDeCusto  registro = iterator.next();
-			txtCodigo.setText(String.format("%d",registro.getId()));
-			txtNome.setText(iterator.next().getNome());
+		if(!registros.isEmpty()) {
+			CentroDeCusto registro = registros.get(posicaoAtual); //retorna o primeiro elemento dos registros
+			txtCodigo.setText(String.format("%d",registro.getId()));      //popula os campos de texto com os dados do registro
+			txtNome.setText(registro.getNome());
 			txtSaldo.setText(String.format("%.2f", registro.getSaldo()));
 		}
 		
@@ -49,22 +50,46 @@ public class CadastroCentroDeCustoController implements Initializable {
 	
 	@FXML
 	public void onButtonProximoAction(ActionEvent event) {
-		System.out.println("Clicou em Proximo");
+		if(posicaoAtual+1 < registros.size()) {
+			posicaoAtual+=1 ; //incrementa a posição atual
+			CentroDeCusto registro = registros.get(posicaoAtual);    //retorna o elemento da que corresponde a próxima posição nos registros
+			txtCodigo.setText(String.format("%d",registro.getId())); //popula os campos de texto com os dados do registro
+			txtNome.setText(registro.getNome());
+			txtSaldo.setText(String.format("%.2f", registro.getSaldo()));
+		}
 	}
 	
 	@FXML
 	public void onButtonAnteriorAction(ActionEvent event) {
-		System.out.println("Clicou em Anterior");
+		if(posicaoAtual-1 >= 0) {
+			posicaoAtual-=1; //decrementa a posição atual
+			CentroDeCusto registro = registros.get(posicaoAtual);    //retorna o elemento da que corresponde a posição anterior nos registros
+			txtCodigo.setText(String.format("%d",registro.getId())); //popula os campos de texto com os dados do registro
+			txtNome.setText(registro.getNome());
+			txtSaldo.setText(String.format("%.2f", registro.getSaldo()));
+		}
 	}
 	
 	@FXML
 	public void onButtonPrimeiroAction(ActionEvent event) {
-		System.out.println("Clicou em Primeiro");
+		if(!registros.isEmpty()) {
+			posicaoAtual = 0;
+			CentroDeCusto registro = registros.get(posicaoAtual);    //retorna o primeiro elemento dos registros
+			txtCodigo.setText(String.format("%d",registro.getId())); //popula os campos de texto com os dados do registro
+			txtNome.setText(registro.getNome());
+			txtSaldo.setText(String.format("%.2f", registro.getSaldo()));
+		}
 	}
 	
 	@FXML
 	public void onButtonUltimoAction(ActionEvent event) {
-		System.out.println("Clicou em Ultimo");
+		if(!registros.isEmpty()) {
+			posicaoAtual = registros.size()-1;
+			CentroDeCusto registro = registros.get(posicaoAtual);    //retorna o primeiro elemento dos registros
+			txtCodigo.setText(String.format("%d",registro.getId())); //popula os campos de texto com os dados do registro
+			txtNome.setText(registro.getNome());
+			txtSaldo.setText(String.format("%.2f", registro.getSaldo()));
+		}
 	}
 	
 	@FXML
