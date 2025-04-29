@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.dmsouza.financas.application.Main;
-import br.com.dmsouza.financas.gui.util.Util;
 import br.com.dmsouza.financas.model.CentroDeCusto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

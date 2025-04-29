@@ -48,8 +48,6 @@ public class CentroDeCustoController implements Initializable{
 		}
 		obsList = FXCollections.observableArrayList(list);
 		tableViewCentroDeCusto.setItems(obsList);
-		//initEditButtons();
-		//initRemoveButtons();
 	}
 	
 	@FXML

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.CadastroCentroDeCustoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.CadastroCentroDeCustoController">
    <children>
       <GridPane>
         <columnConstraints>
@@ -68,6 +68,7 @@
                   <Button fx:id="btNovo" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonNovoAction" prefWidth="65.0" text="Novo" />
                   <Button fx:id="btEditar" layoutX="10.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonEditarAction" prefWidth="65.0" text="Editar" />
                   <Button fx:id="btExcluir" layoutX="75.0" layoutY="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonExcluirAction" prefWidth="65.0" text="Excluir" />
+                  <Button fx:id="btCancela" minWidth="-Infinity" mnemonicParsing="false" onAction="#onButtonCancelaAction" prefWidth="65.0" text="Cancela" />
                </children>
                <GridPane.margin>
                   <Insets left="10.0" />
