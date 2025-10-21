@@ -1,6 +1,5 @@
 /*representa um repositório financeiro que contém uma quantia determinada dinheiro. 
 Podendo ser uma conta bancária, uma carteira, cofre. Ou seja, configurado conforme necessidade do usuário*/
-
 package br.com.dmsouza.financas.model;
 
 import javax.persistence.Entity;
@@ -10,19 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "centrosdecusto")
-public class CentroDeCusto {
+@Table(name = "fontesderecursos")
+public class FonteDeRecurso {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;       //para uso e identificação no banco de dados
-	private String nome;  //nome do centro de custo
-	private double saldo;   //saldo atual do centro de custo
+	private String nome;  //nome da fonte de recurso
+	private double saldo; //saldo atual da fonte de recurso
 	
-	public CentroDeCusto(){}
+	public FonteDeRecurso(){}
 	
 	//contrutores, gets e setters padrões
-	public CentroDeCusto(String nome, double saldo) {
+	public FonteDeRecurso(String nome, double saldo) {
 		this.nome = nome;
 		this.saldo = saldo;
 	}

@@ -5,7 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.dmsouza.financas.application.Main;
-import br.com.dmsouza.financas.model.CentroDeCusto;
+import br.com.dmsouza.financas.gui.util.ViewConstants;
+import br.com.dmsouza.financas.model.FonteDeRecurso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,17 +14,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainViewController implements Initializable{
 	
-	@FXML private MenuItem menuItemCentroDeCusto;
+	@FXML private MenuItem menuItemFonteDeRecurso;
 	@FXML private MenuItem menuItemExtratoMensal;
 	@FXML private MenuItem menuItemVersao;
+	@FXML private VBox containerTableView;	
+	
+	private FonteDeRecursoListController controllerFonteDeRecursoList;
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		loadFonteDeRecursoListView();
 	}
 	
 	@FXML
@@ -37,48 +42,42 @@ public class MainViewController implements Initializable{
 	}
 
 	@FXML
-	public void onMenuItemCentroDeCustoAction(ActionEvent event) {
+	public void onMenuItemFonteDeRecursoAction(ActionEvent event) {
 		Stage parentStage = (Stage) Main.getMainScene().getWindow();
-		CentroDeCusto obj = new CentroDeCusto();
-		createDialogFormCentroDeCusto(obj, "/views/CadastroCentroDeCusto.fxml", parentStage);	
-		/*
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/CentroDeCustoView.fxml"));
-			VBox newVBox = loader.load();
-			
-			Scene mainScene = Main.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); //referência o primeiro elemento da Scene que no caso em questão é um VBox
-			
-			Node mainMenu = mainVBox.getChildren().get(0); //guarda uma referência para os filhos do VBox que no caso em questão é um Menu
-			mainVBox.getChildren().clear(); //limpa os elementos do VBox. Senão for feito a cada clique vai ser gerada uma nova view
-			mainVBox.getChildren().add(mainMenu); //adiciona ao VBox o Menu
-			mainVBox.getChildren().addAll(newVBox.getChildren());
-			
-			CentroDeCustoController controller = loader.getController(); //pega o controlador do arquivo fxml passado no parâmetro
-			controller.updateTableView(); //atualiza a TableView
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
+		FonteDeRecurso obj = new FonteDeRecurso();
+		createDialogFormFonteDeRecurso(obj, ViewConstants.CADASTRO_FONTE_DE_RECURSO, parentStage);	
+		loadFonteDeRecursoListView();
 	}
 	
-	private void createDialogFormCentroDeCusto(CentroDeCusto obj, String absoluteName, Stage parentStage) {
+	private void loadFonteDeRecursoListView() {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewConstants.TABELA_DE_FONTE_DE_RECURSO));
+	        VBox fonteDeRecursoListView = loader.load();
+
+	        controllerFonteDeRecursoList = loader.getController();
+	        containerTableView.getChildren().clear(); //limpa a VBox antes
+	        containerTableView.getChildren().add(fonteDeRecursoListView);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	private void createDialogFormFonteDeRecurso(FonteDeRecurso obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
 			
-			CadastroCentroDeCustoController controller = loader.getController();
-			controller.updateView();
-			
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Cadastro de Centro de Custo");
+			dialogStage.setTitle("Cadastro de Fonte de Recurso");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
-
+			if(controllerFonteDeRecursoList != null) {
+				controllerFonteDeRecursoList.updateTableView();
+			}
 		}
 		catch(IOException e) {
 			e.printStackTrace();

@@ -3,33 +3,56 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.MainViewController">
-   <content>
-      <VBox prefHeight="379.0" prefWidth="507.0">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.MainViewController">
+   <children>
+      <VBox prefHeight="768.0" prefWidth="1024.0">
          <children>
-            <MenuBar>
-               <menus>
-                  <Menu mnemonicParsing="false" text="Cadastros">
-                     <items>
-                        <MenuItem fx:id="menuItemCentroDeCusto" mnemonicParsing="false" onAction="#onMenuItemCentroDeCustoAction" text="Centros de Custo" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Relatórios">
-                     <items>
-                        <MenuItem fx:id="menuItemExtratoMensal" mnemonicParsing="false" onAction="#onMenuItemExtratoMensalAction" text="Extrato Mensal" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Sobre">
-                     <items>
-                        <MenuItem fx:id="menuItemVersao" mnemonicParsing="false" onAction="#onMenuItemVersaoAction" text="Versão" />
-                     </items>
-                  </Menu>
-               </menus>
-            </MenuBar>
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="1024.0">
+               <children>
+                  <MenuBar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="1024.0">
+                     <menus>
+                        <Menu mnemonicParsing="false" text="Cadastros">
+                           <items>
+                              <MenuItem fx:id="menuItemFonteDeRecurso" mnemonicParsing="false" onAction="#onMenuItemFonteDeRecursoAction" text="Fontes de Recurso" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Relatórios">
+                           <items>
+                              <MenuItem fx:id="menuItemExtratoMensal" mnemonicParsing="false" onAction="#onMenuItemExtratoMensalAction" text="Extrato Mensal" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Sobre">
+                           <items>
+                              <MenuItem fx:id="menuItemVersao" mnemonicParsing="false" onAction="#onMenuItemVersaoAction" text="Versão" />
+                           </items>
+                        </Menu>
+                     </menus>
+                  </MenuBar>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="375.0" prefWidth="507.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="718.0" />
+                  <VBox fx:id="containerTableView" alignment="CENTER_LEFT" prefHeight="375.0" prefWidth="718.0">
+                     <children>
+                        <TableView fx:id="tableViewFonteDeRecurso" prefHeight="375.0" prefWidth="516.0">
+                           <columns>
+                              <TableColumn fx:id="tableColumnCodigo" prefWidth="46.0" text="Código" />
+                              <TableColumn fx:id="tableColumnNome" prefWidth="180.0" text="Nome" />
+                              <TableColumn fx:id="tableColumnSaldo" prefWidth="79.0" text="Saldo" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
-   </content>
-</ScrollPane>
+   </children>
+</Pane>

@@ -2,7 +2,7 @@ package br.com.dmsouza.financas.model.dao;
 
 import javax.persistence.EntityManager;
 
-import br.com.dmsouza.financas.model.Credito;
+import br.com.dmsouza.financas.model.Transacao;
 
 public class CreditoDao {
 	
@@ -12,7 +12,7 @@ public class CreditoDao {
 		this.em = em;
 	}
 	
-	public void cadastrar(Credito credito) {
+	public void cadastrar(Transacao credito) {
 		this.em.persist(credito);
 	}
 

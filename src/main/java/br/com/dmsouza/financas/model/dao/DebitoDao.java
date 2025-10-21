@@ -1,4 +1,4 @@
-package br.com.dmsouza.financas.model.dao;
+/*package br.com.dmsouza.financas.model.dao;
 
 import javax.persistence.EntityManager;
 
@@ -16,4 +16,4 @@ public class DebitoDao {
 		this.em.persist(debito);
 	}
 
-}
+}*/

@@ -1,19 +1,5 @@
 package financeiro;
 
-import java.time.LocalDate;
-
-import javax.persistence.EntityManager;
-
-import br.com.dmsouza.financas.model.Categoria;
-import br.com.dmsouza.financas.model.CentroDeCusto;
-import br.com.dmsouza.financas.model.Credito;
-import br.com.dmsouza.financas.model.Debito;
-import br.com.dmsouza.financas.model.dao.CategoriaDao;
-import br.com.dmsouza.financas.model.dao.CentroDeCustoDao;
-import br.com.dmsouza.financas.model.dao.CreditoDao;
-import br.com.dmsouza.financas.model.dao.DebitoDao;
-import br.com.dmsouza.financas.util.JPAUtil;
-
 public class MainTeste {
 	
 	public static void main(String[] args) {
