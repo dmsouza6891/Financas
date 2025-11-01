@@ -1,40 +1,48 @@
-//representa uma operação de crédito realizada em determinado centro de custo.
+//representa uma operação de crédito realizada em determinada Fonte de Recurso.
 package br.com.dmsouza.financas.model;
 
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.dmsouza.financas.model.enums.TipoTransacao;
+
 @Entity
-@Table(name = "creditos")
+@Table(name = "transacoes")
 public class Transacao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; //para uso e identificação no bando de dados 
-	private LocalDate dataOcorrencia; //data em que o débito ocorreu
+	private LocalDate dataOcorrencia = LocalDate.now(); //data em que o débito ocorreu
 	private String descricao; //descrição do débito para efeitos de reconhecimentos futuros
 	private double valor; //valor do débito
 	
 	@ManyToOne
-	FonteDeRecurso centrodecusto; //centro de custo escolhido para custear o débito
+	private FonteDeRecurso fonteDeRecurso; //centro de custo escolhido para custear o débito
 	@ManyToOne
-	Categoria categoria; //categoria, configurada pelo usuário, para indicar a que grupo pertence o débito 
+	private Categoria categoria; //categoria, configurada pelo usuário, para indicar a que grupo pertence o débito 
+	
+	@Enumerated(EnumType.STRING)
+	private TipoTransacao tipo;
 	
 	public Transacao() {}
 	
 	//construtor, getters e setters padrões
-	public Transacao(LocalDate dataOcorrencia, String descricao, double valor, FonteDeRecurso centrodecusto, Categoria categoria) {
+	public Transacao(LocalDate dataOcorrencia, String descricao, double valor, FonteDeRecurso fonteDeRecurso, Categoria categoria, TipoTransacao tipo) {
 		this.dataOcorrencia = dataOcorrencia;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.centrodecusto = centrodecusto;
+		this.fonteDeRecurso = fonteDeRecurso;
 		this.categoria = categoria;
+		this.tipo = tipo;
 	}
 	public LocalDate getDataOcorrencia() {
 		return dataOcorrencia;
@@ -54,5 +62,16 @@ public class Transacao {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+	protected void setId(int id) {
+		this.id = id;
+	}
+	public int getId() {
+		return id;
+	}
+	public TipoTransacao getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoTransacao tipo) {
+		this.tipo = tipo;
+	}
 }
