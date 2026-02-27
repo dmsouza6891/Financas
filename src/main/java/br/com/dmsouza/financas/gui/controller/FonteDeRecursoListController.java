@@ -35,12 +35,15 @@ public class FonteDeRecursoListController implements Initializable{
 	}
 
 	private void initializeNodes() {
-		//trecho usado para indicar com quais dados serão populados as células da tabela
+		//trecho usado para indicar com quais dados serï¿½o populados as cï¿½lulas da tabela
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,Integer>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,String>("nome"));
 		tableColumnSaldo.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,Double>("saldo"));
-	
-		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		
+		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale.Builder()
+		                              .setLanguage("pt")
+		                              .setRegion("BR")
+		                              .build());
 
 		tableColumnSaldo.setCellFactory(new Callback<TableColumn<FonteDeRecurso, Double>, TableCell<FonteDeRecurso, Double>>() {
 		    @Override

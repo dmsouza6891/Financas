@@ -22,7 +22,7 @@ import javafx.scene.control.TextField;
 
 public class CadastroFonteDeRecursoController implements Initializable {
 	
-	//botões de controle da janela
+	//botï¿½es de controle da janela
 	@FXML private Button btPrimeiro;
 	@FXML private Button btAnterior;
 	@FXML private Button btProximo;
@@ -32,12 +32,17 @@ public class CadastroFonteDeRecursoController implements Initializable {
 	@FXML private Button btCancela;
 	@FXML private Button btExcluir;
 	
-	@FXML private TextField txtCodigo; //exibe o código de cadastro do registro
+	@FXML private TextField txtCodigo; //exibe o cï¿½digo de cadastro do registro
 	@FXML private TextField txtNome;   //exibe o nome de cadastro do registro
 	@FXML private TextField txtSaldo;  //exite o saldo do centro de custo do registro
-	                        
-	private static Locale linguagemPadrao = new Locale("pt", "BR"); //usado para tratar o padrão monetário do saldo exibido  
-
+	                       
+	//usado para tratar o padrï¿½o monetï¿½rio do saldo exibido  
+	private static final Locale LINGUAGEM_PADRAO = new Locale.Builder()   
+	        										   .setLanguage("pt")
+	                                                   .setRegion("BR")
+	                                                   .build();
+	
+	
 	FonteDeRecursoDao dao = DaoFactory.getFonteDeRecursoDao(); //objeto utilizado para acessar a base de dados
 	private ArrayList<FonteDeRecurso> registros; //utilizado para manusear os registros retornados da base de dados
 	
@@ -49,17 +54,17 @@ public class CadastroFonteDeRecursoController implements Initializable {
 		dao.em.close();
 	}
 	
-	public void updateView() { //utilizado para deixar a janela de cadastro com as configurações padrão
+	public void updateView() { //utilizado para deixar a janela de cadastro com as configuraï¿½ï¿½es padrï¿½o
 		registros = new ArrayList<FonteDeRecurso>(dao.buscarTodos()); 
 		configuraModoExibicaoInicial(); 
-		if(!registros.isEmpty()) { //se houver itens cadastrados configura a janela para exibi-los e insere botões de fluxo e controle
+		if(!registros.isEmpty()) { //se houver itens cadastrados configura a janela para exibi-los e insere botï¿½es de fluxo e controle
 			habilitaModoFluxo();
 			FonteDeRecurso registro = registros.get(0);  //retorna o primeiro elemento dos registros
-			fillTextFields(registro);  //utiliza método para popular os campos de texto com os dados do registro
+			fillTextFields(registro);  //utiliza mï¿½todo para popular os campos de texto com os dados do registro
 		}	     
 	}
 	
-	public void configuraModoExibicaoInicial() { //configura a view com os parâmetros padrões de exibição
+	public void configuraModoExibicaoInicial() { //configura a view com os parï¿½metros padrï¿½es de exibiï¿½ï¿½o
 		esvaziaTextFields();
 		btNovo.setText("Novo");
 		btEditar.setText("Editar");
@@ -71,7 +76,7 @@ public class CadastroFonteDeRecursoController implements Initializable {
 		desabilitaTextFields(); 
 	}
 	
-	public void configuraModoInsercao() { //configura elementos da view para a inserção dos dados
+	public void configuraModoInsercao() { //configura elementos da view para a inserï¿½ï¿½o dos dados
 		txtNome.setDisable(false);
 		txtSaldo.setDisable(false);
 		desabilitaModoFluxo();
@@ -124,7 +129,7 @@ public class CadastroFonteDeRecursoController implements Initializable {
 	public void fillTextFields(FonteDeRecurso registro) {  //popula os campos da view com os dados do registro a ser exibido
 		txtCodigo.setText(String.format("%d",registro.getId())); 
 		txtNome.setText(registro.getNome());
-		txtSaldo.setText(NumberFormat.getCurrencyInstance(linguagemPadrao).format(registro.getSaldo()));
+		txtSaldo.setText(NumberFormat.getCurrencyInstance(LINGUAGEM_PADRAO).format(registro.getSaldo()));
 	}
 	
 	private int getPosicaoAtual(){  //retorna o id CentrodeCusto correspondente ao Id atual do form
@@ -132,26 +137,26 @@ public class CadastroFonteDeRecursoController implements Initializable {
 	    return registros.indexOf(dao.buscarPorId(idAtual));
 	}
 	
-	@FXML //atualiza a variável de posição e carrega a View com o registro posterior
+	@FXML //atualiza a variï¿½vel de posiï¿½ï¿½o e carrega a View com o registro posterior
 	public void onButtonProximoAction(ActionEvent event) {
 		if(getPosicaoAtual() < registros.size()-1)
 			fillTextFields(registros.get(getPosicaoAtual()+1));
 	}
 	
-	@FXML //atualiza a variável de posição e carrega a View com o registro anterior
+	@FXML //atualiza a variï¿½vel de posiï¿½ï¿½o e carrega a View com o registro anterior
 	public void onButtonAnteriorAction(ActionEvent event) {
 		if(getPosicaoAtual() > 0)
 			fillTextFields(registros.get(getPosicaoAtual()-1));
 	}
 	
-	@FXML //atualiza a variável de posição e carrega a View com o primeiro registro
+	@FXML //atualiza a variï¿½vel de posiï¿½ï¿½o e carrega a View com o primeiro registro
 	public void onButtonPrimeiroAction(ActionEvent event) { 
 		if(!registros.isEmpty()) {
 			fillTextFields(registros.get(0));
 		}
 	}
 	
-	@FXML //atualiza a variável de posição e carrega a View com o último registro
+	@FXML //atualiza a variï¿½vel de posiï¿½ï¿½o e carrega a View com o ï¿½ltimo registro
 	public void onButtonUltimoAction(ActionEvent event) { 
 		if(!registros.isEmpty()) {
 			fillTextFields(registros.get(registros.size()-1)); 
@@ -159,7 +164,7 @@ public class CadastroFonteDeRecursoController implements Initializable {
 	}
 	
 	@FXML
-	public void onButtonNovoAction(ActionEvent event) { //configura as rotinas a serem realizadas quando o botão Novo é clicado
+	public void onButtonNovoAction(ActionEvent event) { //configura as rotinas a serem realizadas quando o botï¿½o Novo ï¿½ clicado
 		
 		switch(btNovo.getText()) {
 			case "Novo":
@@ -171,24 +176,24 @@ public class CadastroFonteDeRecursoController implements Initializable {
 				registro.setNome(txtNome.getText());
 				
 				try {
-					NumberFormat numeroFormato = NumberFormat.getNumberInstance(linguagemPadrao);
+					NumberFormat numeroFormato = NumberFormat.getNumberInstance(LINGUAGEM_PADRAO);
 					Number saldo = numeroFormato.parse(txtSaldo.getText());
 					registro.setSaldo(saldo.doubleValue());
 				}
 				catch(NumberFormatException e) {
-					Alerts.showAlert("Erro de Entrada-NumberFormat","Saldo inválido", "Você precisa digitar um número válido", AlertType.WARNING);
+					Alerts.showAlert("Erro de Entrada-NumberFormat","Saldo invï¿½lido", "Vocï¿½ precisa digitar um nï¿½mero vï¿½lido", AlertType.WARNING);
 				}
 				catch(ParseException e) {
-					Alerts.showAlert("Erro de Entrada-ParseException","Saldo inválido", "Você precisa digitar um número válido", AlertType.WARNING);
+					Alerts.showAlert("Erro de Entrada-ParseException","Saldo invï¿½lido", "Vocï¿½ precisa digitar um nï¿½mero vï¿½lido", AlertType.WARNING);
 				}
 				
-				if(txtNome.getText().isEmpty() || txtSaldo.getText().isEmpty()) { //utilizado para garantir que os campos obrigatórios estão preenchidos
-				    Alerts.showAlert("Validação", "Campos obrigatórios", "Preencha todos os campos", AlertType.WARNING);
+				if(txtNome.getText().isEmpty() || txtSaldo.getText().isEmpty()) { //utilizado para garantir que os campos obrigatï¿½rios estï¿½o preenchidos
+				    Alerts.showAlert("Validaï¿½ï¿½o", "Campos obrigatï¿½rios", "Preencha todos os campos", AlertType.WARNING);
 				    return;
 				}
 		
-				if(dao.buscaNome(registro.getNome())) { //caso de inserção de registro com nome existente
-					Alerts.showAlert("Erro de Entrada","Banco de Dados", "Já existe uma Fonte de Recurso com esse nome, insira outro nome", AlertType.WARNING);
+				if(dao.buscaNome(registro.getNome())) { //caso de inserï¿½ï¿½o de registro com nome existente
+					Alerts.showAlert("Erro de Entrada","Banco de Dados", "Jï¿½ existe uma Fonte de Recurso com esse nome, insira outro nome", AlertType.WARNING);
 				}
 			    else {
 			    	dao.em.getTransaction().begin();
@@ -201,24 +206,24 @@ public class CadastroFonteDeRecursoController implements Initializable {
 	}
 	
 	@FXML
-	public void onButtonEditarAction(ActionEvent event) { //configura as rotinas a serem realizadas quando o botão Editar é clicado
+	public void onButtonEditarAction(ActionEvent event) { //configura as rotinas a serem realizadas quando o botï¿½o Editar ï¿½ clicado
 		
-		switch(btEditar.getText()){ //controla os estágios do botão 
-			case "Editar": //habilita os campos para a alteração dos dados 
+		switch(btEditar.getText()){ //controla os estï¿½gios do botï¿½o 
+			case "Editar": //habilita os campos para a alteraï¿½ï¿½o dos dados 
 				if(!txtCodigo.getText().isEmpty()){
 					configuraModoEdicao();
 				}
 			break;
-			case "Gravar": //operacionaliza a persistência dos dados editados
+			case "Gravar": //operacionaliza a persistï¿½ncia dos dados editados
 				FonteDeRecurso atual = dao.em.find(FonteDeRecurso.class, Integer.parseInt(txtCodigo.getText())); //altera para estado Gerenciado
 				
 				if (txtNome.getText().isEmpty() || txtSaldo.getText().isEmpty()) {
-				    Alerts.showAlert("Validação", "Campos obrigatórios", "Preencha todos os campos", AlertType.WARNING);
+				    Alerts.showAlert("Validaï¿½ï¿½o", "Campos obrigatï¿½rios", "Preencha todos os campos", AlertType.WARNING);
 				    return;
 				}
 				
-				if(dao.buscaNome(txtNome.getText())) { //caso de inserção de registro com nome existente
-					Alerts.showAlert("Aviso","Banco de Dados", "Já existe um Fonte de Recurso com esse nome, insira outro nome", AlertType.WARNING);
+				if(dao.buscaNome(txtNome.getText())) { //caso de inserï¿½ï¿½o de registro com nome existente
+					Alerts.showAlert("Aviso","Banco de Dados", "Jï¿½ existe um Fonte de Recurso com esse nome, insira outro nome", AlertType.WARNING);
 				}
 			    else {
 			    	atual.setNome(txtNome.getText());
@@ -235,7 +240,7 @@ public class CadastroFonteDeRecursoController implements Initializable {
 	public void onButtonExcluirAction(ActionEvent event) {
 		
 		if(!registros.isEmpty()){
-			Optional<ButtonType> result = Alerts.showConfirmation("Confirmação", "Deseja realmente excluir esta fonte de recurso?");
+			Optional<ButtonType> result = Alerts.showConfirmation("Confirmaï¿½ï¿½o", "Deseja realmente excluir esta fonte de recurso?");
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				dao.em.getTransaction().begin();
 				dao.remover(dao.em.find(FonteDeRecurso.class, Integer.parseInt(txtCodigo.getText())));

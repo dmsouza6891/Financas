@@ -1,16 +1,9 @@
-//representa uma operação de crédito realizada em determinada Fonte de Recurso.
+//representa uma operaï¿½ï¿½o de crï¿½dito realizada em determinada Fonte de Recurso.
 package br.com.dmsouza.financas.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 import br.com.dmsouza.financas.model.enums.TipoTransacao;
 
@@ -20,22 +13,22 @@ public class Transacao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id; //para uso e identificação no bando de dados 
-	private LocalDate dataOcorrencia = LocalDate.now(); //data em que o débito ocorreu
-	private String descricao; //descrição do débito para efeitos de reconhecimentos futuros
-	private double valor; //valor do débito
+	private int id; //para uso e identificaï¿½ï¿½o no bando de dados 
+	private LocalDate dataOcorrencia = LocalDate.now(); //data em que o dï¿½bito ocorreu
+	private String descricao; //descriï¿½ï¿½o do dï¿½bito para efeitos de reconhecimentos futuros
+	private double valor; //valor do dï¿½bito
 	
 	@ManyToOne
-	private FonteDeRecurso fonteDeRecurso; //centro de custo escolhido para custear o débito
+	private FonteDeRecurso fonteDeRecurso; //centro de custo escolhido para custear o dï¿½bito
 	@ManyToOne
-	private Categoria categoria; //categoria, configurada pelo usuário, para indicar a que grupo pertence o débito 
+	private Categoria categoria; //categoria, configurada pelo usuï¿½rio, para indicar a que grupo pertence o dï¿½bito 
 	
 	@Enumerated(EnumType.STRING)
 	private TipoTransacao tipo;
 	
 	public Transacao() {}
 	
-	//construtor, getters e setters padrões
+	//construtor, getters e setters padrï¿½es
 	public Transacao(LocalDate dataOcorrencia, String descricao, double valor, FonteDeRecurso fonteDeRecurso, Categoria categoria, TipoTransacao tipo) {
 		this.dataOcorrencia = dataOcorrencia;
 		this.descricao = descricao;

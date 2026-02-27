@@ -1,11 +1,7 @@
-//representa uma categoria de um débito ou crédito, para ser possível agrupá-los
+//representa uma categoria de um dï¿½bito ou crï¿½dito, para ser possï¿½vel agrupï¿½-los
 package br.com.dmsouza.financas.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "categorias")
@@ -13,12 +9,12 @@ public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id; //para uso e identificação no banco de dados
-	private String nome; //nome da categoria que representará o grupo de débitos ou créditos
+	private int id; //para uso e identificaï¿½ï¿½o no banco de dados
+	private String nome; //nome da categoria que representarï¿½ o grupo de dï¿½bitos ou crï¿½ditos
 	
 	public Categoria() {}
 	
-	//contrutor, getters e setters padrões
+	//contrutor, getters e setters padrï¿½es
 	public Categoria(String nome) {
 		this.nome = nome;
 	}

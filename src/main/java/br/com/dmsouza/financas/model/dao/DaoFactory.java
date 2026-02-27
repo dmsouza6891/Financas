@@ -1,6 +1,6 @@
 package br.com.dmsouza.financas.model.dao;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.*;
 
 import br.com.dmsouza.financas.util.JPAUtil;
 
