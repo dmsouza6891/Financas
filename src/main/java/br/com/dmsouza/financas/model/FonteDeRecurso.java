@@ -1,8 +1,12 @@
-/*representa um repositï¿½rio financeiro que contï¿½m uma quantia determinada dinheiro. 
-Podendo ser uma conta bancï¿½ria, uma carteira, cofre. Ou seja, configurado conforme necessidade do usuï¿½rio*/
+/*representa um repositório financeiro que contém uma quantia determinada dinheiro. 
+Podendo ser uma conta bancária, uma carteira, cofre. Ou seja, configurado conforme necessidade do usuário*/
 package br.com.dmsouza.financas.model;
 
-import jakarta.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "fontesderecursos")
@@ -10,13 +14,13 @@ public class FonteDeRecurso {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;       //para uso e identificaï¿½ï¿½o no banco de dados
+	private int id;       //para uso e identificação no banco de dados
 	private String nome;  //nome da fonte de recurso
 	private double saldo; //saldo atual da fonte de recurso
 	
 	public FonteDeRecurso(){}
 	
-	//contrutores, gets e setters padrï¿½es
+	//contrutores, gets e setters padrões
 	public FonteDeRecurso(String nome, double saldo) {
 		this.nome = nome;
 		this.saldo = saldo;

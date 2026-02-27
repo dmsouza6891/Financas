@@ -3,7 +3,7 @@ package br.com.dmsouza.financas.model.dao;
 import java.util.Iterator;
 import java.util.List;
 
-import jakarta.persistence.*;
+import javax.persistence.EntityManager;
 
 import br.com.dmsouza.financas.model.FonteDeRecurso;
 
@@ -32,7 +32,7 @@ public class FonteDeRecursoDao {
 		return this.em.find(FonteDeRecurso.class, id);
 	}
 	
-	public boolean buscaNome(String nome) {  //verifica de existe a ocorrï¿½ncia de um nome nos cadastros
+	public boolean buscaNome(String nome) {  //verifica de existe a ocorrência de um nome nos cadastros
 		List<FonteDeRecurso> cadastros = buscarTodos();
 		Iterator<FonteDeRecurso> iterator = cadastros.iterator();
 		FonteDeRecurso registro;
