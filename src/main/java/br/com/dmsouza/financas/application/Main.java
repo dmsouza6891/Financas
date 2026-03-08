@@ -18,10 +18,12 @@ public class Main extends Application {
 			Pane Pane = loader.load();
 		
 			mainScene = new Scene(Pane);
-			System.out.println("***************************************Início***************************************");
+			System.out.println("***************************************Inï¿½cio***************************************");
 			primaryStage.setScene(mainScene);
 			primaryStage.setTitle("Controle Financeiro");
 			primaryStage.show();
+			
+			//AGORA VAI
 			
 		}
 		catch(Exception e){
