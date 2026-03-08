@@ -23,6 +23,7 @@ public class MainViewController implements Initializable{
 	@FXML private MenuItem menuItemFonteDeRecurso;
 	@FXML private MenuItem menuItemExtratoMensal;
 	@FXML private MenuItem menuItemVersao;
+	@FXML private MenuItem menuItemGerenciarCompetencias;
 	@FXML private VBox containerTableView;	
 	
 	private FonteDeRecursoListController controllerFonteDeRecursoList;
@@ -38,7 +39,12 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemVersaoAction() {
-		System.out.println("Clicou em Versão");
+		System.out.println("Clicou em Versï¿½o");
+	}
+	
+	@FXML
+	public void onMenuItemGerenciarCompetenciasAction() {
+		System.out.println("Clicou em Gerenciar Competencias");
 	}
 
 	@FXML

@@ -23,7 +23,6 @@ public class Main extends Application {
 			primaryStage.setTitle("Controle Financeiro");
 			primaryStage.show();
 			
-			//AGORA VAI
 			
 		}
 		catch(Exception e){

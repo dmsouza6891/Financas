@@ -31,6 +31,7 @@ public class FonteDeRecursoListController implements Initializable{
 	
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
+		tableViewFonteDeRecurso.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS); //para ajustar a visualização da TableView não gerando colunas em branco ao lado para preencher espaço de view
 		updateTableView();
 	}
 

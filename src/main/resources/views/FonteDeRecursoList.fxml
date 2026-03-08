@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.FonteDeRecursoListController">
+<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.FonteDeRecursoListController">
    <children>
+      <Label alignment="CENTER" text="FONTES DE RECURSOS" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
       <TableView fx:id="tableViewFonteDeRecurso" prefHeight="200.0" prefWidth="335.0">
         <columns>
           <TableColumn fx:id="tableColumnCodigo" prefWidth="65.0" text="Código" />
