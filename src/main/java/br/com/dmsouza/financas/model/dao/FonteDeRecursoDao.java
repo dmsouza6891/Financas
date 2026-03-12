@@ -15,17 +15,17 @@ public class FonteDeRecursoDao {
 		this.em = em;
 	}
 	
-	public void cadastrar(FonteDeRecurso centrodecusto) {
-		this.em.persist(centrodecusto);
+	public void cadastrar(FonteDeRecurso fontederecurso) {
+		this.em.persist(fontederecurso);
 	}
 	
-	public void editar(FonteDeRecurso centrodecusto) {
-		this.em.merge(centrodecusto);
+	public void editar(FonteDeRecurso fontederecurso) {
+		this.em.merge(fontederecurso);
 	}
 	
-	public void remover(FonteDeRecurso centrodecusto) {
-		centrodecusto = em.merge(centrodecusto);
-		this.em.remove(centrodecusto);
+	public void remover(FonteDeRecurso fontederecurso) {
+		fontederecurso = em.merge(fontederecurso);
+		this.em.remove(fontederecurso);
 	}
 	
 	public FonteDeRecurso buscarPorId(int id) {

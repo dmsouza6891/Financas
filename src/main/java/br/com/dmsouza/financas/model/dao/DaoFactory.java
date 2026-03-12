@@ -11,5 +11,9 @@ public class DaoFactory {
 	public static FonteDeRecursoDao getFonteDeRecursoDao() {
 		return new FonteDeRecursoDao(em);
 	}
+	
+	public static CompetenciaDao getCompetenciaDao() {
+		return new CompetenciaDao(em);
+	}
 
 }

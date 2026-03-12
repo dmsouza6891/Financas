@@ -33,7 +33,7 @@ public class Competencia {
 	@OneToMany(mappedBy = "competencia", cascade = CascadeType.ALL)
 	private List<CompetenciaFonteRecurso> fontes = new ArrayList<>();
 	
-	protected Competencia() {
+	public Competencia() {
 	}
 	
 	public Competencia(int id, YearMonth referencia, SituacaoCompetencia situacao, List<Transacao> transacoes, List<CompetenciaFonteRecurso> fontes) {

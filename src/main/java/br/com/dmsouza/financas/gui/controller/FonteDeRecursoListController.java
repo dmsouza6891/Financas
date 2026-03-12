@@ -1,5 +1,6 @@
 package br.com.dmsouza.financas.gui.controller;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.List;
@@ -7,8 +8,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import br.com.dmsouza.financas.model.FonteDeRecurso;
-import br.com.dmsouza.financas.model.dao.FonteDeRecursoDao;
 import br.com.dmsouza.financas.model.dao.DaoFactory;
+import br.com.dmsouza.financas.model.dao.FonteDeRecursoDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class FonteDeRecursoListController implements Initializable{
 	@FXML private TableView<FonteDeRecurso> tableViewFonteDeRecurso;
 	@FXML private TableColumn<FonteDeRecurso, Integer> tableColumnCodigo;
 	@FXML private TableColumn<FonteDeRecurso, String> tableColumnNome;
-	@FXML private TableColumn<FonteDeRecurso, Double> tableColumnSaldo;
+	@FXML private TableColumn<FonteDeRecurso, BigDecimal> tableColumnSaldo;
 	
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
@@ -36,22 +37,22 @@ public class FonteDeRecursoListController implements Initializable{
 	}
 
 	private void initializeNodes() {
-		//trecho usado para indicar com quais dados ser�o populados as c�lulas da tabela
+		//trecho usado para indicar com quais dados serão populados as células da tabela
 		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,Integer>("id"));
 		tableColumnNome.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,String>("nome"));
-		tableColumnSaldo.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,Double>("saldo"));
+		tableColumnSaldo.setCellValueFactory(new PropertyValueFactory<FonteDeRecurso,BigDecimal>("saldo"));
 		
 		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale.Builder()
 		                              .setLanguage("pt")
 		                              .setRegion("BR")
 		                              .build());
 
-		tableColumnSaldo.setCellFactory(new Callback<TableColumn<FonteDeRecurso, Double>, TableCell<FonteDeRecurso, Double>>() {
+		tableColumnSaldo.setCellFactory(new Callback<TableColumn<FonteDeRecurso, BigDecimal>, TableCell<FonteDeRecurso, BigDecimal>>() {
 		    @Override
-		    public TableCell<FonteDeRecurso, Double> call(TableColumn<FonteDeRecurso, Double> column) {
-		        return new TableCell<FonteDeRecurso, Double>() {
+		    public TableCell<FonteDeRecurso, BigDecimal> call(TableColumn<FonteDeRecurso, BigDecimal> column) {
+		        return new TableCell<FonteDeRecurso, BigDecimal>() {
 		            @Override
-		            protected void updateItem(Double item, boolean empty) {
+		            protected void updateItem(BigDecimal item, boolean empty) {
 		                super.updateItem(item, empty);
 		                if (empty || item == null) {
 		                    setText(null);

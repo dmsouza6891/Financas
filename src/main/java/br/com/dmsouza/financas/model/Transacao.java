@@ -1,11 +1,18 @@
 //representa uma transação realizada em determinada Fonte de Recurso.
 package br.com.dmsouza.financas.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import jakarta.persistence.*;
-
 import br.com.dmsouza.financas.model.enums.TipoTransacao;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "transacoes")
@@ -16,7 +23,7 @@ public class Transacao {
 	private int id; //para uso e identificação no bando de dados 
 	private LocalDate dataOcorrencia = LocalDate.now(); //data em que transação ocorreu
 	private String descricao; //descrição da transação para efeitos de reconhecimentos futuros
-	private double valor; //valor do débito
+	private BigDecimal valor; //valor do débito
 	
 	@ManyToOne
 	private FonteDeRecurso fonteDeRecurso; //Fonte de Recurso onde será realizada a transação 
@@ -31,7 +38,7 @@ public class Transacao {
 	public Transacao() {}
 	
 	//construtor, getters e setters padr�es
-	public Transacao(LocalDate dataOcorrencia, String descricao, double valor, FonteDeRecurso fonteDeRecurso, Categoria categoria, Competencia competencia, TipoTransacao tipo) {
+	public Transacao(LocalDate dataOcorrencia, String descricao, BigDecimal valor, FonteDeRecurso fonteDeRecurso, Categoria categoria, Competencia competencia, TipoTransacao tipo) {
 		this.dataOcorrencia = dataOcorrencia;
 		this.descricao = descricao;
 		this.valor = valor;
@@ -52,10 +59,10 @@ public class Transacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
-	public void setValor(double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 	protected void setId(int id) {
@@ -94,5 +101,6 @@ public class Transacao {
 	public void setCompetencia(Competencia competencia) {
 		this.competencia = competencia;
 	}
+	
 	
 }
