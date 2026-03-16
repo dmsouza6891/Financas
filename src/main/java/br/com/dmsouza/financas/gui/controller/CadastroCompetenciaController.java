@@ -10,6 +10,8 @@ import br.com.dmsouza.financas.gui.util.Alerts;
 import br.com.dmsouza.financas.model.Competencia;
 import br.com.dmsouza.financas.model.dao.CompetenciaDao;
 import br.com.dmsouza.financas.model.dao.DaoFactory;
+import br.com.dmsouza.financas.model.enums.SituacaoCompetencia;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,9 +34,9 @@ public class CadastroCompetenciaController implements Initializable {
 	@FXML private Button btExcluir;
 	
 	@FXML private TextField txtCodigo; //exibe o código de cadastro do registro
-	@FXML private TextField txtMes;   //exibe o mês da competência
-	@FXML private TextField txtAno;  //exibe o ano da competência
-	@FXML private ComboBox<String> comboBoxSituacao; //exibe a situação da competência
+	@FXML private TextField txtMes;    //exibe o mês da competência
+	@FXML private TextField txtAno;    //exibe o ano da competência
+	@FXML private ComboBox<SituacaoCompetencia> comboBoxSituacao; //exibe a situação da competência
 	                      
 	CompetenciaDao dao = DaoFactory.getCompetenciaDao(); //objeto utilizado para acessar a base de dados
 	private ArrayList<Competencia> registros; //utilizado para manusear os registros retornados da base de dados
@@ -65,6 +67,8 @@ public class CadastroCompetenciaController implements Initializable {
 		btEditar.setDisable(true);
 		btExcluir.setDisable(true);
 		btCancela.setVisible(false);
+		comboBoxSituacao.setItems(FXCollections.observableArrayList(SituacaoCompetencia.values()));
+		comboBoxSituacao.setDisable(true);
 		desabilitaModoFluxo();
 		desabilitaTextFields(); 
 	}
@@ -72,6 +76,7 @@ public class CadastroCompetenciaController implements Initializable {
 	public void configuraModoInsercao() { //configura elementos da view para a inserção dos dados
 		txtMes.setDisable(false);
 		txtAno.setDisable(false);
+		comboBoxSituacao.setDisable(false);
 		desabilitaModoFluxo();
 		esvaziaTextFields();
 		btNovo.setText("Gravar");
@@ -82,8 +87,7 @@ public class CadastroCompetenciaController implements Initializable {
 	}
 	
 	public void configuraModoEdicao() { //configura elementos da view para a edicao dos dados
-		txtMes.setDisable(false);
-		txtAno.setDisable(false);
+		comboBoxSituacao.setDisable(false);
 		desabilitaModoFluxo();
 		btEditar.setText("Gravar");
 		btCancela.setVisible(true);
@@ -125,6 +129,7 @@ public class CadastroCompetenciaController implements Initializable {
 		txtCodigo.setText(String.format("%d",registro.getId())); 
 		txtMes.setText(String.format("%d",registro.getReferencia().getMonthValue()));
 		txtAno.setText(String.format("%d",registro.getReferencia().getYear()));
+		comboBoxSituacao.setValue(registro.getSituacao());
 	}
 	
 	private int getPosicaoAtual(){  //retorna o id CentrodeCusto correspondente ao Id atual do form
@@ -172,20 +177,21 @@ public class CadastroCompetenciaController implements Initializable {
 				try {
 					int mes = Integer.parseInt(txtMes.getText());
 					int ano = Integer.parseInt(txtAno.getText());
-					YearMonth referencia = YearMonth.of(mes, ano);
+					YearMonth referencia = YearMonth.of(ano, mes);
 					registro.setReferencia(referencia);
+					registro.setSituacao(comboBoxSituacao.getValue());
 				}
 				catch(NumberFormatException e) {
 					Alerts.showAlert("Erro de Entrada-ParseException","Dados Inválidos", "Você precisa digitar um número válido", AlertType.WARNING);
 				}
 				
-				if(txtMes.getText().isEmpty() || txtAno.getText().isEmpty()) { //utilizado para garantir que os campos obrigat�rios est�o preenchidos
+				if(txtMes.getText().isEmpty() || txtAno.getText().isEmpty()) { //utilizado para garantir que os campos obrigatórios estão preenchidos
 				    Alerts.showAlert("Validação", "Campos obrigatórios", "Preencha todos os campos", AlertType.WARNING);
 				    return;
 				}
 		
-				if(dao.buscaCompetencia(registro.getReferencia())){ //caso de inserçãp de registro com referencia existente
-					Alerts.showAlert("Erro de Entrada","Banco de Dados", "Já existe uma Comepetencia com essa referencia, insira outro período", AlertType.WARNING);
+				if(dao.buscaCompetencia(registro.getReferencia())){ //caso de inserção de registro com referencia existente
+					Alerts.showAlert("Erro de Entrada","Banco de Dados", "Já existe uma Competencia com essa referencia, insira outro período", AlertType.WARNING);
 				}
 			    else {
 			    	dao.em.getTransaction().begin();
@@ -200,39 +206,24 @@ public class CadastroCompetenciaController implements Initializable {
 	@FXML
 	public void onButtonEditarAction(ActionEvent event) { //configura as rotinas a serem realizadas quando o bot�o Editar � clicado
 		
-		switch(btEditar.getText()){ //controla os est�gios do bot�o 
-			case "Editar": //habilita os campos para a altera��o dos dados 
+		switch(btEditar.getText()){ //controla os estágios do botão 
+			case "Editar": //habilita os campos para a alteração dos dados 
 				if(!txtCodigo.getText().isEmpty()){
 					configuraModoEdicao();
 				}
 			break;
-			case "Gravar": //operacionaliza a persist�ncia dos dados editados
+			case "Gravar": //operacionaliza a persistência dos dados editados
 				Competencia atual = dao.em.find(Competencia.class, Integer.parseInt(txtCodigo.getText())); //altera para estado Gerenciado
 				
-				if(txtMes.getText().isEmpty() || txtAno.getText().isEmpty()) { //utilizado para garantir que os campos obrigat�rios est�o preenchidos
-				    Alerts.showAlert("Validação", "Campos obrigatórios", "Preencha todos os campos", AlertType.WARNING);
-				    return;
+				if(atual.getSituacao()!=comboBoxSituacao.getValue()) {
+					atual.setSituacao(comboBoxSituacao.getValue());
+					dao.em.getTransaction().begin();
+					dao.editar(atual);
+					dao.em.getTransaction().commit();
+					updateView();
 				}
-				
-				try {
-					int mes = Integer.parseInt(txtMes.getText());
-					int ano = Integer.parseInt(txtAno.getText());
-					YearMonth referencia = YearMonth.of(mes, ano);
-					
-					if(dao.buscaCompetencia(referencia)) { //caso de inserção de registro com nome existente
-						Alerts.showAlert("Aviso","Banco de Dados", "Já existe um Fonte de Recurso com esse nome, insira outro nome", AlertType.WARNING);
-					}
-				    else {
-				    	atual.setReferencia(referencia);
-				    	dao.em.getTransaction().begin();
-				    	dao.editar(atual);
-				    	dao.em.getTransaction().commit();
-				    	updateView();
-				    }
-				}
-				catch(NumberFormatException e) {
-					Alerts.showAlert("Erro de Entrada-ParseException","Dados Inválidos", "Você precisa digitar um número válido", AlertType.WARNING);
-				}
+				else
+					Alerts.showAlert("Aviso","Banco de Dados", "Os dados não foram alterados", AlertType.WARNING);
 			break;
 		}
 	}
@@ -241,7 +232,7 @@ public class CadastroCompetenciaController implements Initializable {
 	public void onButtonExcluirAction(ActionEvent event) {
 		
 		if(!registros.isEmpty()){
-			Optional<ButtonType> result = Alerts.showConfirmation("Confirma��o", "Deseja realmente excluir esta fonte de recurso?");
+			Optional<ButtonType> result = Alerts.showConfirmation("Confirmação", "Deseja realmente excluir esta competência?");
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				dao.em.getTransaction().begin();
 				dao.remover(dao.em.find(Competencia.class, Integer.parseInt(txtCodigo.getText())));

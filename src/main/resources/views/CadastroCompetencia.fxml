@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.CadastroFonteDeRecursoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.dmsouza.financas.gui.controller.CadastroCompetenciaController">
    <children>
       <GridPane prefHeight="150.0" prefWidth="336.0">
         <columnConstraints>
@@ -52,7 +52,7 @@
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin></Label>
-            <TextField fx:id="txtNome" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="49.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="txtMes" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="49.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" top="10.0" />
                </GridPane.margin>
@@ -73,8 +73,8 @@
                </GridPane.margin>
             </HBox>
             <Label layoutX="20.0" layoutY="77.0" text="Ano" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="txtNome1" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtAno" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="79.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <ComboBox fx:id="comboBoxSituacao" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import br.com.dmsouza.financas.application.Main;
 import br.com.dmsouza.financas.gui.util.ViewConstants;
+import br.com.dmsouza.financas.model.Competencia;
 import br.com.dmsouza.financas.model.FonteDeRecurso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class MainViewController implements Initializable{
 	@FXML private VBox containerTableView;	
 	
 	private FonteDeRecursoListController controllerFonteDeRecursoList;
+	private CadastroCompetenciaController controllerCadastroCompetencia;
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		loadFonteDeRecursoListView();
@@ -44,7 +46,9 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemGerenciarCompetenciasAction() {
-		System.out.println("Clicou em Gerenciar Competencias");
+		Stage parentStage = (Stage) Main.getMainScene().getWindow();
+		Competencia obj = new Competencia	();
+		createDialogFormCompetencia(obj, ViewConstants.CONTROLE_COMPETENCIA, parentStage);	
 	}
 
 	@FXML
@@ -67,6 +71,27 @@ public class MainViewController implements Initializable{
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	private void createDialogFormCompetencia(Competencia obj, String absoluteName, Stage parentStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Controle de Competencias");
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.setResizable(false);
+			dialogStage.initOwner(parentStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait();
+			if(controllerCadastroCompetencia != null) {
+				controllerCadastroCompetencia.updateView();
+			}
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void createDialogFormFonteDeRecurso(FonteDeRecurso obj, String absoluteName, Stage parentStage) {
